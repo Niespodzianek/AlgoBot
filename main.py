@@ -3,7 +3,6 @@ import pandas as pd
 import os
 
 def zapis_surowych_danych(tiker: str, notowania: pd.DataFrame, verbose=True) -> bool:
-    # sciezka: str = f"data/raw/{tiker}.csv"
     sciezka: str = f"{tiker}_raw.csv"
     if verbose:
         os.system("clear")
@@ -90,12 +89,11 @@ def main(verbose=True) -> None:
         input("Naciśnij ENTER aby kontynuować...")
     return None
     
-
 if __name__ == "__main__":
     os.system("clear")
     print("Witaj w programie do analizy danych giełdowych!")
     input("Naciśnij ENTER aby kontynuować...")
-    main(verbose=True)
+    main(verbose=False)
     os.system("clear")
     print("Dziękuję za skorzystanie z programu!\nDo zobaczenia !!!")
     input("Naciśnij ENTER aby zakończyć...")
