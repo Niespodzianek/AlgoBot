@@ -343,11 +343,15 @@ name = "python-template"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "pandas" },
     { name = "yfinance" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "yfinance", specifier = ">=0.2.65" }]
+requires-dist = [
+    { name = "pandas", specifier = ">=2.3.1" },
+    { name = "yfinance", specifier = ">=0.2.65" },
+]
 
 [[package]]
 name = "pytz"
