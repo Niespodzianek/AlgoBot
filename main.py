@@ -71,8 +71,7 @@ def main(tiker: str) -> None:
 if __name__ == "__main__":
     os.system("cls" if os.name == "nt" else "clear")
     if "--help" in sys.argv:
-        print(f"""
-        Pomoc dla programu {APP_NAME}:
+        print(f"""Pomoc dla programu {APP_NAME}:
         
         Funkcje programu:
         Pobieranie danych i notowań wybranej spółki z serwisu Yahoo Finance a następnie analiza pobranych danych.
@@ -95,8 +94,7 @@ if __name__ == "__main__":
         print(f"Program {APP_NAME}, wersja: {VERSION}")
         sys.exit()
     if "--history" in sys.argv:
-        print(f"""
-        Historia dotychczasowych wersji programu {APP_NAME}. Aktualna wersja ma numer: {VERSION}:
+        print(f"""Historia dotychczasowych wersji programu {APP_NAME}. Aktualna wersja ma numer: {VERSION}:
          
         0.0.2.
         Pobieranie danych i notowań spółki z serwisu Yahoo Finance.
