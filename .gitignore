@@ -183,3 +183,11 @@ Icon?
 .project
 .settings/
 .cache/
+
+# ====================================
+# Moje dodatki
+data/
+data/raw/
+.data/
+.data/raw/
+

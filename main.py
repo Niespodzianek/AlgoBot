@@ -3,7 +3,7 @@ import yfinance as yt
 import pandas as pd
 
 APP_NAME: str = "AlgoBot"
-VERSION: str = "0.0.1"
+VERSION: str = "0.0.2"
 DEBUG: bool = "--debug" in sys.argv
 INFO: bool = "--info" in sys.argv
 symbol: str = ""
@@ -44,11 +44,16 @@ def poprawa_danych(tiker: str, notowania: pd.DataFrame) -> (bool, pd.DataFrame):
 
 def pobranie_surowych_danych(tiker: str) -> (bool, pd.DataFrame):
     try:
+        debug_print(f"Rozpoczynam pobieranie danych spółki {tiker} z serwisu Yahoo Finance.")
         spolka = yt.Ticker(tiker)
+        debug_print(f"Pobrałem dane: {spolka}.")
+        debug_print("Tworzę dataFrame.")
         notowania: pd.DataFrame = spolka.history(period="max")
         if len(notowania) > 0:
+            debug_print(f"Oto dataFrame z pobranymi notowaniami dla spółki {tiker}:\n{notowania}")
             return True, notowania
         elif notowania.empty:
+            debug_print("Pobrano pusty plik !!!")
             return False, None
     except Exception:
         os.system("clear")
@@ -58,11 +63,12 @@ def pobranie_surowych_danych(tiker: str) -> (bool, pd.DataFrame):
 def main(tiker: str) -> None:
     status: bool = False
     notowania: pd.DataFrame
-    print(f"Rozpoczynam sprawdzanie spółki:{tiker}.")
-    # todo sprawdzenie czy spółka jest już w bazie pobranych notowań
+    debug_print(f"Rozpoczynam proces analizy spółki: {tiker}.")
+    # todo sprawdzenie czy spółka jest już w bazie pobranych notowań w katalogu data/raw
     # todo jeżeli jest to rozpoczynamy analizę
     # todo jeżeli nie ma to pobieram surowe dane
-    # status, surowe_notowania = pobranie_surowych_danych(tiker=tiker)
+    status, surowe_notowania = pobranie_surowych_danych(tiker=tiker)
+    # todo zapis surowych danych do pliku csv i do pliku parquet
     # status = zapis_surowych_danych(tiker=tiker, notowania=surowe_notowania)
     # status, poprawione_notowania = poprawa_danych(tiker=tiker, notowania=surowe_notowania)
     # status = zapis_poprawionych_danych(tiker=tiker, notowania=poprawione_notowania)
@@ -97,7 +103,7 @@ if __name__ == "__main__":
         print(f"""Historia dotychczasowych wersji programu {APP_NAME}. Aktualna wersja ma numer: {VERSION}:
          
         0.0.2.
-        Pobieranie danych i notowań spółki z serwisu Yahoo Finance.
+        Pobieranie danych i notowań spółki z serwisu Yahoo Finance, z obsługą błędów.
         
         0.0.1.
         Obsługa flag.
